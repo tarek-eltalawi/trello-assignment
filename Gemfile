@@ -33,6 +33,8 @@ gem 'spring',        group: :development
 gem 'pry-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
+gem 'will_paginate', '~> 3.0.5'
+gem 'will_paginate-bootstrap'
 
 # Use unicorn as the app server
 # gem 'unicorn'
