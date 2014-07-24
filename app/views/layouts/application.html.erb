@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trello</title>
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <%= stylesheet_link_tag    'bootstrap.min.css', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+<body>
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+<div class="container">
+  <div class="navbar">
+    <div class="navbar-inner">
+      
+     
+    <% if user_signed_in? %>
+    
+    <ul class="nav nav-pills">
+        <li class="active"><a href="http://localhost:3000/projects">My Projects</a></li>
+        <li ><a href="http://localhost:3000">Home</a></li>
+        <li><a href="#">TOUR</a></li>
+        <li class="dropdown pull-right">
+          <a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#"><%=current_user.email %><b class="caret"></b></a>
+          <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+            <li role="presentation"><a href="http://localhost:3000/projects">Profile</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><%= link_to 'Edit profile', edit_user_registration_path %></li>
+            <li role="presentation"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li> 
+      </ul>
+    <% else %>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="http://localhost:3000/">HOME</a></li>
+        <li><a href="#">TOUR</a></li>
+        <li><a href="#">GOLD</a></li>
+        <li><a href="#">BUSINESS CLASS</a></li>
+        <li><a href="#">BLOG</a></li>
+        <p class="navbar-text pull-right">
+      <%= link_to "Sign up", new_user_registration_path%> |
+      <%= link_to "Login", new_user_session_path%>
+      </ul>
+    <% end %>
+    </div>
+
+  </div>
+</div>
+
+
+<div style="background-color:#D8F0F2" class="container-fluid">
+  
+    <div class="span10">
+      <!--Body content-->
+      <%= yield %>
+    </div>
+  </div>
+</div>
+</body>
+</html>
