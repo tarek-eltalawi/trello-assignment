@@ -1,10 +1,27 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_user]
   
+  #GET  /projects
+  def add_user
+    user_name = params[:q]
+    @user = User.find_by_email user_name
+    if @user
+      @user.projects << @project
+      respond_to do |format|
+          format.html { redirect_to @project, notice: 'User successfully added' }
+          format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+          format.html { redirect_to projects_url, notice: 'Not found user' }
+          format.json { head :no_content }
+      end
+    end
+  end
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.all.paginate(:page => params[:page], :per_page => 4)
   end
 
   # GET /projects/1

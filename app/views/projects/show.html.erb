@@ -10,6 +10,12 @@
   <%= @project.description %>
 </p>
  <h1>Listing stories</h1>
+  <div class="pull-right">
+	  <%= form_tag(add_user_project_path(@project)) do %> 
+	  		<%= label_tag(:q, "Email: ") %> <%= text_field_tag(:q) %>
+	    	<%= submit_tag("Add User") %>
+	  <% end %>
+ </div>
 <table>
   <tbody>
     <% @project.stories.each do |story| %>
@@ -19,7 +25,7 @@
 		</div>
       </tr>
       <!-- Modal -->
-      <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div id="myModal" class="modal hide fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-header">
 		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		    <h3 id="myModalLabel"><%=story.name%></h3>

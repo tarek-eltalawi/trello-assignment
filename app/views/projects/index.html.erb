@@ -21,7 +21,6 @@
             </div>
             <h3><%= project.name %></h3>
             <p><%= truncate(strip_tags(project.description), length: 80) %></p>
-            
           </div>
         </div>
       </li>
@@ -30,6 +29,7 @@
   </tbody>
 </table>
 
-<br>
+<%= will_paginate @project, renderer: BootstrapPagination::Rails %>
 
+<br>
 <%= link_to 'New Project', new_project_path %>
