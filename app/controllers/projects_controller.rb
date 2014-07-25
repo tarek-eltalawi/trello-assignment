@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   #POST  /projects
   def search
     project_name = params[:q]
-    @proj = Project.find_by_name project_name
+    @proj = current_user.projects.find_by_name project_name
     if @proj
       respond_to do |format|
           format.html { redirect_to @proj, notice: 'Project Found' }
