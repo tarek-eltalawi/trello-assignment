@@ -3,12 +3,13 @@
 <div class="bs-docs-example " style="padding-bottom: 24px;padding-top: 24px;">
 	<a data-toggle="modal" href="#" class="btn btn-primary btn-large"><%=@project.name%></a>
 </div>  
+<%= button_tag @project.name, title: @project.name, class: 'btn btn-lg btn-danger', rel: 'popover', :data=>{content: @project.description}%>
 	
 	<div class="bs-example">
 		<h3 style="text-align:center; color:white"><b><i>To Do</i></b></h3>
 	    <div class="list-group">
 	    	<% @project.stories.each do |story| %>
-	    		<%if story.state='to do' %>
+	    		<%if story.state=='to do' %>
 			      <a href="#myModal" class="list-group-item" style="background-color:#DCB6F1">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
@@ -36,7 +37,7 @@
 		<h3 style="text-align:center; color:white"><b><i>Doing</i></b></h3>
 	    <div class="list-group">
 	    	<% @project.stories.each do |story| %>
-	    		<%if story.state='doing' %>
+	    		<%if story.state=='doing' %>
 			      <a href="#myModal" class="list-group-item" style="background-color:#90F890">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
@@ -64,7 +65,7 @@
 	 	<h3 style="text-align:center; color:white"><b><i>Done</i></b></h3>
 	    <div class="list-group" >
 	    	<% @project.stories.each do |story| %>
-	    		<%if story.state='done' %>
+	    		<%if story.state=='done' %>
 			      <a href="#myModal" class="list-group-item" style="background-color:#FDB5B5">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
@@ -93,10 +94,9 @@
 <%= link_to 'Edit', edit_project_path(@project) , style: 'color:white'%> 
 <%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } , style: 'color:white' %>
 <%= link_to 'Back', projects_path, style: 'color:white' %>
-<form role="form">
-	<%= form_tag(add_user_project_path(@project), class: 'form-group') do %> 
-		<%= text_field_tag placeholder: 'Enter Email' %>
+<%= form_tag add_user_project_path(@project) do %> 
+	<div class="form-group">
+		<%= text_field_tag placeholder: 'Enter Email' , class: 'form-control' %>
 		<%= submit_tag("Add User", class: 'btn btn-default active') %>
-	<% end %>
-</form>
-
+	</div>
+<% end %>
