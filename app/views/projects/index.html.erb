@@ -5,8 +5,6 @@
         <%= submit_tag("Search") %>
     <% end %>
  </div>
-<h1>Listing projects</h1>
-
 <br>
 <table>
   <thead>
@@ -36,4 +34,4 @@
 <%= will_paginate @project, renderer: BootstrapPagination::Rails %>
 
 <br>
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'New Project', new_project_path, style: 'color:white' %>
