@@ -9,7 +9,7 @@
 		<h3 style="text-align:center; color:white"><b><i>To Do</i></b></h3>
 	    <div class="list-group">
 	    	<% @project.stories.each do |story| %>
-	    		<%if story.state=='to do' %>
+	    		<%if story.state='to do' %>
 			      <a href="#myModal" class="list-group-item" style="background-color:#DCB6F1">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
@@ -37,7 +37,7 @@
 		<h3 style="text-align:center; color:white"><b><i>Doing</i></b></h3>
 	    <div class="list-group">
 	    	<% @project.stories.each do |story| %>
-	    		<%if story.state=='doing' %>
+	    		<%if story.state='doing' %>
 			      <a href="#myModal" class="list-group-item" style="background-color:#90F890">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
@@ -65,8 +65,8 @@
 	 	<h3 style="text-align:center; color:white"><b><i>Done</i></b></h3>
 	    <div class="list-group" >
 	    	<% @project.stories.each do |story| %>
-	    		<%if story.state=='done' %>
-			      <a href="#myModal" class="list-group-item" style="background-color:#FDB5B5">
+	    		<%if story.state='done' %>
+			      <a href="#myModal" class="list-group-item" style="background-color:#FA7373">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
 			      </a>
