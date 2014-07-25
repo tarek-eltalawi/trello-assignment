@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   get '/projects/add_user', to: 'projects#add_user'
+  post '/projects/search', to: 'projects#search'
 
   resources :projects do
     collection do

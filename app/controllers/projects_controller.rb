@@ -1,19 +1,43 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_user]
   
-  #GET  /projects
-  def add_user
-    user_name = params[:q]
-    @user = User.find_by_email user_name
-    if @user
-      @user.projects << @project
+
+  #POST  /projects
+  def search
+    project_name = params[:q]
+    @proj = Project.find_by_name project_name
+    if @proj
       respond_to do |format|
-          format.html { redirect_to @project, notice: 'User successfully added' }
+          format.html { redirect_to @proj, notice: 'Project Found' }
           format.json { head :no_content }
       end
     else
       respond_to do |format|
-          format.html { redirect_to projects_url, notice: 'Not found user' }
+          format.html { redirect_to projects_url, notice: 'Not found project name' }
+          format.json { head :no_content }
+      end
+    end
+  end
+  #POST  /projects
+  def add_user
+    user_name = params[:q]
+    @user = User.find_by_email user_name
+    if @user
+      if @user.projects.find_by_id(@project.id)
+        respond_to do |format|
+          format.html { redirect_to @project, notice: 'User Already added' }
+          format.json { head :no_content }
+        end
+      else
+        @user.projects << @project
+        respond_to do |format|
+          format.html { redirect_to @project, notice: 'User successfully added' }
+          format.json { head :no_content }
+        end
+      end
+    else
+      respond_to do |format|
+          format.html { redirect_to @project, notice: 'Not found user' }
           format.json { head :no_content }
       end
     end
