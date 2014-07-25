@@ -2,85 +2,91 @@
 
 <div class="bs-docs-example " style="padding-bottom: 24px;padding-top: 24px;">
 	<a data-toggle="modal" href="#" class="btn btn-primary btn-large"><%=@project.name%></a>
-</div>
-<div class="row">
-  <div class="col-xs-3 col-sm-3" style="background:#e3e3e3;border-radius:3px; box-sizing:border-box; padding-right:300px ;position:relative;">
+</div>  
 	
-	<div class="row" style="padding: 6px 8px 4px;"><b>To Do</b></div>
-  	<% @project.stories.each do |story| %>
+	<div class="bs-example">
+		<h3 style="text-align:center; color:white"><b><i>To Do</i></b></h3>
+	    <div class="list-group">
+	    	<% @project.stories.each do |story| %>
+	    		<%if story.state='to do' %>
+			      <a href="#myModal" class="list-group-item" style="background-color:#DCB6F1">
+			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
+			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
+			      </a>
+			    <%end%>
+			    <!-- Modal -->
+		      	<div id="myModal" class="modal hide fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    <h3 id="myModalLabel"><%=story.name%></h3>
+				  </div>
+				  <div class="modal-body">
+				    <p>One fine body…</p>
+				  </div>
+				  <div class="modal-footer">
+				    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				    <button class="btn btn-primary">Save changes</button>
+				  </div>
+				</div>
+		    <%end%>
+	    </div>
+	 </div>
 
-	  	<%if story.state='to do' %>
+	<div class="bs-example">
+		<h3 style="text-align:center; color:white"><b><i>Doing</i></b></h3>
+	    <div class="list-group">
+	    	<% @project.stories.each do |story| %>
+	    		<%if story.state='doing' %>
+			      <a href="#myModal" class="list-group-item" style="background-color:#90F890">
+			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
+			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
+			      </a>
+			    <%end%>
+			    <!-- Modal -->
+		      	<div id="myModal" class="modal hide fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    <h3 id="myModalLabel"><%=story.name%></h3>
+				  </div>
+				  <div class="modal-body">
+				    <p>One fine body…</p>
+				  </div>
+				  <div class="modal-footer">
+				    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				    <button class="btn btn-primary">Save changes</button>
+				  </div>
+				</div>
+		    <%end%>
+	    </div>
+	 </div>
 
-	        <div class="bs-docs-example row" style="padding: 6px 8px 4px;">
-				<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large"><%=story.name%></a>
-			</div>
-	      	<!-- Modal -->
-	      	<div id="myModal" class="modal hide fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="myModalLabel"><%=story.name%></h3>
-			  </div>
-			  <div class="modal-body">
-			    <p>One fine body…</p>
-			  </div>
-			  <div class="modal-footer">
-			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			    <button class="btn btn-primary">Save changes</button>
-			  </div>
-			</div>
-
-	  	<%end%>
-  	<%end%>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-offset-1" style="background:#e3e3e3;border-radius:3px; box-sizing:border-box; padding-right:300px ;position:relative;">
-  	<div class="row" style="padding: 6px 8px 4px;"><b>Doing</b></div>
-  	<% @project.stories.each do |story| %>
-	  	<%if  story.state='doing' %>
-	  		<div class="bs-docs-example row" style="padding: 6px 8px 4px;">
-				<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large"><%=story.name%></a>
-			</div>
-	      	<!-- Modal -->
-	      	<div id="myModal" class="modal hide fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="myModalLabel"><%=story.name%></h3>
-			  </div>
-			  <div class="modal-body">
-			    <p>One fine body…</p>
-			  </div>
-			  <div class="modal-footer">
-			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			    <button class="btn btn-primary">Save changes</button>
-			  </div>
-			</div>
-	  	<%end%>
-  	<%end%>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-offset-1" style="background:#e3e3e3;border-radius:3px; box-sizing:border-box; padding-right:300px ;position:relative;">
-  	<div class="row" style="padding: 6px 8px 4px;"><b>Done</b></div>
-  	<% @project.stories.each do |story| %>
-	  	<%if  story.state='done' %>
-	  		<div class="bs-docs-example row" style="padding: 6px 8px 4px;">
-				<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large"><%=story.name%></a>
-			</div>
-	      	<!-- Modal -->
-	      	<div id="myModal" class="modal hide fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="myModalLabel"><%=story.name%></h3>
-			  </div>
-			  <div class="modal-body">
-			    <p>One fine body…</p>
-			  </div>
-			  <div class="modal-footer">
-			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			    <button class="btn btn-primary">Save changes</button>
-			  </div>
-			</div>
-	  	<%end%>
-  	<%end%>
-  </div>
-</div>
+	 <div class="bs-example" >
+	 	<h3 style="text-align:center; color:white"><b><i>Done</i></b></h3>
+	    <div class="list-group" >
+	    	<% @project.stories.each do |story| %>
+	    		<%if story.state='done' %>
+			      <a href="#myModal" class="list-group-item" style="background-color:#FDB5B5">
+			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
+			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
+			      </a>
+			    <%end%>
+			    <!-- Modal -->
+		      	<div id="myModal" class="modal hide fade" style="display: none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    <h3 id="myModalLabel"><%=story.name%></h3>
+				  </div>
+				  <div class="modal-body">
+				    <p>One fine body…</p>
+				  </div>
+				  <div class="modal-footer">
+				    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				    <button class="btn btn-primary">Save changes</button>
+				  </div>
+				</div>
+		    <%end%>
+	    </div>
+	 </div>
 	
 <br>
 <%= link_to 'Add User Story', new_project_story_path(@project, Story.new), style: 'color:white' %>
