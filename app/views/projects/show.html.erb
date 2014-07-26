@@ -4,6 +4,7 @@
 	<%= button_tag @project.name, class: 'btn btn-lg btn-danger bs-docs-popover', rel: 'popover', :data=>{
 		content: @project.description, title: @project.name, toggle: 'popover'}%>
   </div>
+  
   <div class="pull-left">
 	  <%= form_tag add_user_project_path(@project), role: 'search' do %> 
 	 	 <div class="form-group"> <%= text_field_tag :q, nil, {placeholder: 'Add Members', class: 'form-control', size: '30px'} 
