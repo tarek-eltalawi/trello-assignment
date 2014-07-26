@@ -11,8 +11,8 @@
 	    <%= submit_tag("Submit", class: 'btn btn-default') %>
 	  <% end %>
  </div>
- <br>
- <br>
+
+
 
   <!-- Button trigger modal -->
 <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#settings">
@@ -44,7 +44,7 @@
   </div>
 </div>
 	
-	<div class="bs-example">
+	<div class="bs-example" style="padding-top:80px">
 		<h3 style="text-align:center; color:white"><b><i>To Do</i></b></h3>
 	    <div class="list-group">
 	    	<% @project.stories.each do |story| %>
