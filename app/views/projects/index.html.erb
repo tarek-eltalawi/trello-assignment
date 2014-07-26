@@ -1,11 +1,4 @@
 <br>
-<div class="pull-right">
-    <%= form_tag('/projects/search', method: :post) do %> 
-        <%= label_tag(:q, "Project Name: ") %> <%= text_field_tag(:q) %>
-        <%= submit_tag("Search") %>
-    <% end %>
- </div>
-<br>
 <table>
   <thead>
     <tr>
@@ -13,6 +6,9 @@
     </tr>
   </thead>
   <tbody>
+    <div class="bs-example " style="padding-bottom: 24px;">
+      <%= button_to "New Project", new_project_path, method: :get, class: 'btn btn-lg btn-danger'%>
+    </div>
     <% current_user.projects.each do |project| %>
     <div style="padding-right:25%; padding-left:20%">
     <ul class="thumbnails">
@@ -32,6 +28,3 @@
 </table>
 
 <%= will_paginate @project, renderer: BootstrapPagination::Rails %>
-
-<br>
-<%= link_to 'New Project', new_project_path, style: 'color:white' %>
