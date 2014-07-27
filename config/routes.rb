@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+
   get 'home/index'
 
   get '/projects/add_user', to: 'projects#add_user'
@@ -14,7 +16,11 @@ Rails.application.routes.draw do
       post :add_user
     end
 
-    resources :stories
+    resources :stories do
+      resources :tasks
+      
+    end
+
   end
 
   devise_for :users

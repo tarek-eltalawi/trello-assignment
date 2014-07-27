@@ -62,11 +62,27 @@
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					        <h4 class="modal-title" id="myModalLabel"><%=story.name%></h4>
+					        <h4 class="modal-title" id="myModalLabel"><%=story.name%></h4><br>
+					        <p><%=story.description%></p>
 					      </div>
 					      <div class="modal-body">
-					        <%=story.description%>
+					     	<% story.tasks.each do |task| %>
+					     		<form role="form">
+						      		<div class="checkbox">
+									    <label>
+									    	<%= check_box_tag task.id %> <p><%= task.description %></p>
+									    </label>
+									</div>
+						      	</form>
+						      	<% if params[task.id] == 1%>
+						      		<% task.state = "done" %>
+						      	<% elsif params[task.id] == 0%>
+						      		<% task.state = "to do" %>
+						      	<%end %>
+					     	<%end%>
+					     	<%= button_to 'Add Tasks', new_project_story_task_path(@project, story, Task.new), method: :get, class: 'btn btn-primary btn-lg btn-block', style: 'float:right;	background-color:#d9534f' %>
 					      </div>
+					      <br><br>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					        <button type="button" class="btn btn-primary">Save changes</button>
@@ -84,20 +100,21 @@
 	    <div class="list-group">
 	    	<% @project.stories.each do |story| %>
 	    		<%if story.state=='doing' %>
-			      <a href="#Doing" data-toggle="modal" data-target="#Doing" class="list-group-item" style="background-color:#90F890">
+			      <a href="#<%=story.id%>" data-toggle="modal" data-target="#<%=story.id%>" class="list-group-item" style="background-color:#90F890">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
 			      </a>
 			      <!-- Modal -->
-			      	<div class="modal fade" id="Doing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			      	<div class="modal fade" id="<%=story.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					        <h4 class="modal-title" id="myModalLabel"><%=story.name%></h4>
+					        <h4 class="modal-title" id="myModalLabel"><%=story.name%></h4><br>
+					        <p><%=story.description%></p>
 					      </div>
 					      <div class="modal-body">
-					        <%=story.description%>
+					        
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -117,20 +134,21 @@
 	    <div class="list-group" >
 	    	<% @project.stories.each do |story| %>
 	    		<%if story.state=='done' %>
-			      <a href="#Done" data-toggle="modal" data-target="#Done" class="list-group-item" style="background-color:#FA7373">
+			      <a href="#<%=story.id%>" data-toggle="modal" data-target="#<%=story.id%>" class="list-group-item" style="background-color:#FA7373">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
 			      </a>
 			      <!-- Modal -->
-			      	<div class="modal fade" id="Done" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			      	<div class="modal fade" id="<%=story.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					        <h4 class="modal-title" id="myModalLabel"><%=story.name%></h4>
+					        <h4 class="modal-title" id="myModalLabel"><%=story.name%></h4><br>
+					        <p><%=story.description%></p>
 					      </div>
 					      <div class="modal-body">
-					        <%=story.description%>
+					        
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
