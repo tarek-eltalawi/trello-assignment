@@ -9,7 +9,7 @@
     <div class="bs-example " style="padding-bottom: 24px;">
       <%= link_to "New Project", new_project_path,class: 'btn btn-lg btn-danger'%>
     </div>
-    <% current_user.projects.each do |project| %>
+    <% @projects.each do |project| %>
     <div style="padding-right:25%; padding-left:20%">
     <ul class="thumbnails">
       <li class="span4">
