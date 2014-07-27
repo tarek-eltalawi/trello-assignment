@@ -4,6 +4,7 @@
 	<%= button_tag @project.name, class: 'btn btn-lg btn-danger bs-docs-popover', rel: 'popover', :data=>{
 		content: @project.description, title: @project.name, toggle: 'popover'}%>
   </div>
+  
   <div class="pull-left">
 	  <%= form_tag add_user_project_path(@project), role: 'search' do %> 
 	 	 <div class="form-group"> <%= text_field_tag :q, nil, {placeholder: 'Add Members', class: 'form-control', size: '30px'} 
@@ -49,12 +50,12 @@
 	    <div class="list-group">
 	    	<% @project.stories.each do |story| %>
 	    		<%if story.state=='to do' %>
-			      <a href="#toDo" data-toggle="modal" data-target="#toDo" class="list-group-item" style="background-color:#DCB6F1">
+			      <a href="#<%=story.id%>" data-toggle="modal" data-target="#<%=story.id%>" class="list-group-item" style="background-color:#DCB6F1">
 			        <h4 class="list-group-item-heading" style="color:#27709b"><%=story.name%></h4>
 			        <p class="list-group-item-text" style="color:#27709b"><%=story.description%></p>
 			      </a>
 			      <!-- Modal -->
-			      	<div class="modal fade" id="toDo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			      	<div class="modal fade" id="<%=story.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
