@@ -15,8 +15,15 @@ class StoriesController < ApplicationController
   # GET /stories/new
   def new
     @project = Project.find params[:project_id]
-    @story = Story.new
-    @story.project_id = params[:project_id] if current_user.projects.where(id: params[:project_id])
+    unless @project.admin == current_user.id
+      respond_to do |format|
+          format.html { redirect_to projects_url, alert: 'Unspecified Action' }
+          format.json { head :no_content }
+      end
+    else
+      @story = Story.new
+      @story.project_id = params[:project_id] if current_user.projects.where(id: params[:project_id])
+    end
   end
 
   # GET /stories/1/edit
