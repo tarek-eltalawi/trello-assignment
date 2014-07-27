@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
       end
     else
       respond_to do |format|
-          format.html { redirect_to projects_url, notice: 'Not found project name' }
+          format.html { redirect_to projects_url, alert: 'Not found project name' }
           format.json { head :no_content }
       end
     end
@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
       end
     else
       respond_to do |format|
-          format.html { redirect_to @project, notice: 'Not found user' }
+          format.html { redirect_to @project, alert: 'Not found user' }
           format.json { head :no_content }
       end
     end
