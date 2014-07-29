@@ -35,6 +35,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'will_paginate', '~> 3.0.7'
 gem 'will_paginate-bootstrap'
+gem "paperclip", "~> 4.1"
 
 # Use unicorn as the app server
 # gem 'unicorn'
