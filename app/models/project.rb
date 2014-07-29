@@ -2,11 +2,9 @@ class Project < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	has_many :stories, dependent: :destroy
 	self.per_page = 4
-	validates :name, :description, :image_url, presence: true
-	validates :image_url, allow_blank: true, format: {
-		with:
-		%r{\.(gif|jpg|png|jpeg)\Z}i,
-		message: 'must be a URL for GIF, JPG or PNG image.'
-	}
+	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+	validates :avatar, :name, :description, presence: true
+	
 	
 end

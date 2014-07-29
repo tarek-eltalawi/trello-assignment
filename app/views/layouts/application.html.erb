@@ -20,27 +20,26 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <div class="container" >
-      <div class="navbar " style="background-color:#166491;">
+      <div class="navbar navbar-static" style="background-color:#166491;">
         <div class="navbar-inner">
           
          
         <% if user_signed_in? %>
 
         <ul class="nav nav-pills" >
-            <li class="active"><a href="http://localhost:3000/projects">My Projects</a></li>
+            <li class="active"><a href="http://localhost:3000/projects">Projects</a></li>
             <li class="active"><a href="http://localhost:3000">Home</a></li>
-            <li class="active"><a href="#">TOUR</a></li>
+            <li class="active" ><a href="#">Tour</a></li>
             <li class="dropdown pull-right active">
               <a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#"><%=current_user.email %><b class="caret"></b></a>
               <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
                 <li role="presentation"><a href="http://localhost:3000/profile/show">Profile</a></li>
                 <li role="presentation" class="divider"></li>
-                <li role="presentation"><%= link_to 'Edit profile', edit_user_registration_path %></li>
                 <li role="presentation"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
             <li class="pull-right">
-              <a href="http://localhost:3000/profile/show"><%= image_tag(current_user.avatar.url,class: 'list_image', :alt => "avatar", :width => 16, :height => 25) %></a>
+              <a href="http://localhost:3000/profile/show"><%= image_tag(current_user.avatar.url,class: 'list_image', :alt => "avatar", :width => 20, :height => 25) %></a>
             </li>
             <li class="pull-right">
               <%= form_tag('/search/show', method: :post, class: 'navbar-form navbar-left', role: 'search') do %> 
@@ -82,6 +81,8 @@
       $('#carouselimage1').css('min-height', screen.height-85);
       $('#carouselimage2').css('min-height', screen.height-85);
       $('#carouselimage3').css('min-height', screen.height-85);
+      // $('#myProjects').css('min-height', screen.height-700);
+      // $('#otherProjects').css('min-height', screen.height-700);
     </script>
   </body>
 </html>

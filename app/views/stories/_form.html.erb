@@ -10,16 +10,20 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, placeholder: 'Enter Name', class: 'form-control', width: '30%' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description, placeholder: 'Enter Description', class: 'form-control', width: '30%'%>
+    </div>
   </div>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-default'%>
   </div>
 <% end %>

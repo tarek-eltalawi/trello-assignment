@@ -22,12 +22,14 @@
       <%= f.text_area :description, placeholder: 'Enter Description', class: 'form-control', width: '30%'%>
     </div>
   </div>
+
   <div class="form-group">
     <div class="field">
-      <%= f.label :image_url %><br>
-      <%= f.text_field :image_url, placeholder: 'Enter image_url', class: 'form-control', width: '30%' %>
+      <%= f.label :image %><br />
+       <%= f.file_field :avatar %>
     </div>
   </div>
+
     <div class="actions">
       <%= f.submit class: 'btn btn-default' %>
     </div>

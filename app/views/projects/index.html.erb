@@ -9,21 +9,47 @@
     <div class="bs-example " style="padding-bottom: 24px;">
       <%= link_to "New Project", new_project_path,class: 'btn btn-lg btn-danger'%>
     </div>
-    <% @projects.each do |project| %>
-    <div style="padding-right:25%; padding-left:20%">
-    <ul class="thumbnails">
-      <li class="span4">
-        <div class="thumbnail">
-          <div style="display:inline-block">
-            <%= link_to(image_tag(project.image_url,class: 'list_image', :alt => "home image", :width => 630, :height => 200), project) %>
-            <h3><%= link_to project.name, project %></h3>
-            <p><%= truncate(strip_tags(project.description), length: 80) %></p>
-          </div>
-        </div>
-      </li>
-    </ul> 
-  </div>
-    <% end %>
+    <ul class="nav nav-pills nav-justified" style="background-color:white">
+      <li class="active"><a href="#myProjects">My Projects</a></li>
+    </ul>
+    <br>
+    <div class="tab-content">
+      <div class="tab-pane active" id="myProjects"style="background-color:white; width:100%; ">
+        <% if @projects.empty? %>
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading">Sorry!</h4>
+              You have not created any projects, You can create projects
+              <%= link_to 'here', new_project_path %>
+            </div>
+        <%else%>
+          <br>
+        <% end %>
+        <% @projects.each do |project| %>
+            <div style="padding-right:35%; padding-left:25%">
+              <ul class="thumbnails">
+                <li class="span4">
+                  <div class="thumbnail">
+                    <div style="display:inline-block">
+                     <div style="padding-right:100px"> <%= link_to(image_tag(project.avatar.url,class: 'list_image', :alt => "home image", :width => 500, :height => 100), project) %>
+                      </div>
+                      <br>
+                      <div class="alert alert-info alert-block pull right" style="display:inline-block; width:100%; height:130px">
+                      <h3 class="alert-heading"><%= link_to project.name, project %></h3>
+                      <i><%= truncate(strip_tags(project.description), length: 80) %></i>
+                    </div>
+                    </div>
+                  </div>
+                </li>
+              </ul> 
+            </div>
+        <% end %>
+        <% unless @projects.empty? %>
+          <br>
+        <%end%>
+      </div>
+
+      
+    </div>
   </tbody>
 </table>
 

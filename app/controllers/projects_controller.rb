@@ -64,7 +64,7 @@ class ProjectsController < ApplicationController
     @project.users << current_user
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to @project }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -113,7 +113,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :image_url)
+      params.require(:project).permit(:name, :description, :image_url, :avatar)
     end
   private
   def invalid_project
