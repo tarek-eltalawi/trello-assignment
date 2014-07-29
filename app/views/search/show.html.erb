@@ -1,0 +1,95 @@
+<h1>Search Results</h1>
+<br>
+<% if @projA.length > 0 %>
+<center>
+<h2>By Name:</h2>
+</center>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projA.each do |project| %>
+    <div style="padding-right:25%; padding-left:20%">
+    <ul class="thumbnails">
+      <li class="span4">
+        <div class="thumbnail">
+          <div style="display:inline-block">
+            <%= link_to(image_tag(project.image_url,class: 'list_image', :alt => "home image", :width => 630, :height => 200), project) %>
+            <h3><%= link_to project.name, project %></h3>
+            <p><%= truncate(strip_tags(project.description), length: 80) %></p>
+          </div>
+        </div>
+      </li>
+    </ul> 
+  </div>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<br>
+<br>
+<% if @projB.length > 0 %>
+<center>
+<h2>By Description:</h2>
+</center>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projB.each do |project| %>
+    <div style="padding-right:25%; padding-left:20%">
+    <ul class="thumbnails">
+      <li class="span4">
+        <div class="thumbnail">
+          <div style="display:inline-block">
+            <%= link_to(image_tag(project.image_url,class: 'list_image', :alt => "home image", :width => 630, :height => 200), project) %>
+            <h3><%= link_to project.name, project %></h3>
+            <p><%= truncate(strip_tags(project.description), length: 80) %></p>
+          </div>
+        </div>
+      </li>
+    </ul> 
+  </div>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<br>
+<% if @projC.length > 0 %>
+<center>
+<h2>By Story:</h2>
+</center>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"> By Story: </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projC.each do |proj| %>
+    <div style="padding-right:25%; padding-left:20%">
+    <ul class="thumbnails">
+      <li class="span4">
+        <div class="thumbnail">
+          <div style="display:inline-block">
+            <%= link_to(image_tag(proj.project.image_url,class: 'list_image', :alt => "home image", :width => 630, :height => 200), proj.project) %>
+            <h3><%= link_to proj.project.name, proj.project %></h3>
+            <p><%= truncate(strip_tags(proj.project.description), length: 80) %></p>
+          </div>
+        </div>
+      </li>
+    </ul> 
+  </div>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+

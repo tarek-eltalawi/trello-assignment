@@ -40,7 +40,7 @@
               </ul>
             </li>
             <li class="pull-right">
-              <%= form_tag('/projects/search', method: :post, class: 'navbar-form navbar-left', role: 'search') do %> 
+              <%= form_tag('/search/show', method: :post, class: 'navbar-form navbar-left', role: 'search') do %> 
                 <div class="form-group"> <%= text_field_tag :q, nil, {placeholder: 'Search for Projects', class: 'form-control', size: '60px'} %> </div>
                 <%= submit_tag("Submit", class: 'btn btn-default') %>
               <% end %>

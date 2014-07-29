@@ -3,22 +3,7 @@ class ProjectsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_project
 
   #POST  /projects
-  def search
-    project_name = params[:q]
-    @proj = current_user.projects.find_by_name project_name
-    if @proj
-      respond_to do |format|
-          format.html { redirect_to @proj, notice: 'Project Found' }
-          format.json { head :no_content }
-      end
-    else
-      respond_to do |format|
-          format.html { redirect_to projects_url, alert: 'Not found project name' }
-          format.json { head :no_content }
-      end
-    end
-  end
-  #POST  /projects
+
   def add_user
     user_name = params[:q]
     @user = User.find_by_email user_name
@@ -30,6 +15,9 @@ class ProjectsController < ApplicationController
         end
       else
         @user.projects << @project
+        @project.stories.each do |story|
+          @user.stories << story
+        end
         respond_to do |format|
           format.html { redirect_to @project, notice: 'User successfully added' }
           format.json { head :no_content }
