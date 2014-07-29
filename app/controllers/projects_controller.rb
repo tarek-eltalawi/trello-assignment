@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_user]
-  
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_project
 
   #POST  /projects
   def search
@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
       end
     else
       respond_to do |format|
-          format.html { redirect_to projects_url, notice: 'Not found project name' }
+          format.html { redirect_to projects_url, alert: 'Not found project name' }
           format.json { head :no_content }
       end
     end
@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
       end
     else
       respond_to do |format|
-          format.html { redirect_to @project, notice: 'Not found user' }
+          format.html { redirect_to @project, alert: 'Not found user' }
           format.json { head :no_content }
       end
     end
@@ -60,6 +60,12 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    unless @project.admin == current_user.id
+      respond_to do |format|
+          format.html { redirect_to projects_url, alert: 'Unspecified Action' }
+          format.json { head :no_content }
+      end
+    end
   end
 
   # POST /projects
@@ -96,21 +102,34 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    if(@project.admin == current_user.id)
+      @project.destroy
+      respond_to do |format|
+        format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      current_user.projects.delete(@project)
+        respond_to do |format|
+          format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+          format.json { head :no_content }
+        end
+    end 
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = current_user.projects.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:name, :description, :image_url)
     end
+  private
+  def invalid_project
+    logger.error "Attempt to access invalid project #{params[:id]}"
+    redirect_to projects_url, alert: 'Invalid project'
+  end
 end

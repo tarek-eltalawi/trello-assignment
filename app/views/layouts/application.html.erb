@@ -33,7 +33,7 @@
             <li class="dropdown pull-right active">
               <a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#"><%=current_user.email %><b class="caret"></b></a>
               <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-                <li role="presentation"><a href="http://localhost:3000/projects">Profile</a></li>
+                <li role="presentation"><a href="http://localhost:3000/profile/show">Profile</a></li>
                 <li role="presentation" class="divider"></li>
                 <li role="presentation"><%= link_to 'Edit profile', edit_user_registration_path %></li>
                 <li role="presentation"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>

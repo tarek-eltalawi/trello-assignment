@@ -9,4 +9,5 @@ class Project < ActiveRecord::Base
 		%r{\.(gif|jpg|png|jpeg)\Z}i,
 		message: 'must be a URL for GIF, JPG or PNG image.'
 	}
+	
 end

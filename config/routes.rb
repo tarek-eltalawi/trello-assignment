@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   
 
+  get 'profile/show'
+
   get 'home/index'
 
   get '/projects/add_user', to: 'projects#add_user'
