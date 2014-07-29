@@ -35,7 +35,10 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(story_params)
     @story.project_id = params[:project_id] if current_user.projects.where(id: params[:project_id])
-    @story.users << current_user
+    @proj = Project.find_by_id(params[:project_id])
+    @proj.users.each do |user|
+      user.stories << @story
+    end
     @story.state = "to do"
     respond_to do |format|
       if @story.save
