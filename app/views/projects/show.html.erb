@@ -115,11 +115,22 @@
 						    </div>
 						  </div>
 						</div>
+						<% if story.project.admin == current_user.id %>
+						<div>
+							<%= form_tag('/stories/add_user', method: :post, class: 'navbar-form navbar-left', role: 'search') do %> 
+				                <div class="form-group"> <%= text_field_tag :q, nil, {placeholder: 'Add member', class: 'form-control', size: '60px'} %> </div>
+				                <%= hidden_field_tag(:stn, story.id) %>
+				                <%= submit_tag("Submit", class: 'btn btn-default') %>
+	             			 <% end %>
+             			 <% end %>
+             			 </div>
+             			 <% if current_user.stories.find_by_id story.id %>
+             			 	<div>Hello Assigned</div>
+             			 <%end%>
 			    <%end%>
 		    <%end%>
 	    </div>
 	 </div>
-
 	<div class="bs-example">
 		<h3 style="text-align:center; color:white"><b><i>Doing</i></b></h3>
 	    <div class="list-group">

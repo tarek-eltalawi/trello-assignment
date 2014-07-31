@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   get '/projects/add_user', to: 'projects#add_user'
+  post '/stories/add_user', to: 'stories#add_user'
   post '/search/show', to: 'search#show'
 
   resources :projects do
@@ -20,6 +21,13 @@ Rails.application.routes.draw do
     end
 
     resources :stories do
+    collection do
+      post :add_user
+    end
+
+    member do
+      post :add_user
+    end
       resources :tasks
       
     end

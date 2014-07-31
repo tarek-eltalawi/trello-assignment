@@ -15,9 +15,6 @@ class ProjectsController < ApplicationController
         end
       else
         @user.projects << @project
-        @project.stories.each do |story|
-          @user.stories << story
-        end
         respond_to do |format|
           format.html { redirect_to @project, notice: 'User successfully added' }
           format.json { head :no_content }
@@ -86,7 +83,6 @@ class ProjectsController < ApplicationController
       end
     end
   end
-
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
@@ -97,6 +93,7 @@ class ProjectsController < ApplicationController
         format.json { head :no_content }
       end
     else
+      current_user.stories.delete(@project.stories)
       current_user.projects.delete(@project)
         respond_to do |format|
           format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
