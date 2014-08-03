@@ -15,3 +15,35 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).ready(function() {  
+    $(".checkbox").change(function() {
+    	var check = $(this).find("input");
+		// var x = $(this).attr('id') ;
+		if(check.is(":checked")){			
+			$(this).find("p").css('text-decoration', 'line-through');
+		}
+		else{
+			$(this).find("p").css('text-decoration', 'none');
+		}
+		$.ajax({
+			// alert ("hellooooo");
+		 	type: 'POST',
+		 	url: '/tasks/taskstate',
+		 	data: {
+		 		id: $(check).attr('id')
+		 	}
+		 });
+    });
+    
+    $('.container-fluid').css('min-height', screen.height-85);
+	$('.container-fluid').css('min-width', screen.width-85);
+	$('#myCarousel').css('min-height', screen.height-85);
+	//$('#myModal').modal()
+	$('#carouselimage1').css('min-height', screen.height-85);
+	$('#carouselimage2').css('min-height', screen.height-85);
+	$('#carouselimage3').css('min-height', screen.height-85);
+	// $('#myProjects').css('min-height', screen.height-700);
+	// $('#otherProjects').css('min-height', screen.height-700);
+});
+
+	

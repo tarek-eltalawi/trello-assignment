@@ -1,5 +1,34 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :todo, :doing, :done]
+
+
+  def todo
+    @project = current_user.projects.find(params[:project_id])
+    @story.state = "to do"
+    @story.save
+    respond_to do |format|
+      format.js 
+    end
+  end
+
+  def doing 
+    @project = current_user.projects.find(params[:project_id])
+    # @project = current_user.projects.find(params[:id])
+    @story.state = "doing"
+    @story.save
+    respond_to do |format|
+      format.js 
+    end
+  end
+
+  def done
+    @project = current_user.projects.find(params[:project_id])
+    @story.state = "done"
+    @story.save
+    respond_to do |format|
+      format.js 
+    end
+  end
 
   # GET /stories
   # GET /stories.json

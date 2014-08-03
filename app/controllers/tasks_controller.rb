@@ -1,6 +1,14 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :taskstate]
 
+  def taskstate
+    if @task.state == "to do"
+      @task.state = "done"
+    else
+      @task.state = "to do"
+    end
+    @task.save
+  end
   # GET /tasks
   # GET /tasks.json
   def index

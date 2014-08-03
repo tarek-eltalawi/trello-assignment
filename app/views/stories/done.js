@@ -1,0 +1,3 @@
+$('#notice').hide();
+
+$('#tarek').html("<%= escape_javascript render(@project) %>");
