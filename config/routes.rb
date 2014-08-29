@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   get 'home/index'
 
   get '/projects/add_user', to: 'projects#add_user'
-  post '/stories/todo.:format', to: 'stories#todo.js'
-  post '/stories/doing.:format', to: 'stories#doing.js'
-  post '/stories/done.:format', to: 'stories#done.js'
+  post '/stories/todo.:format', to: 'stories#todo'
+  post '/stories/doing.:format', to: 'stories#doing'
+  post '/stories/done.:format', to: 'stories#done'
   post '/tasks/taskstate', to: 'tasks#taskstate'
+  post '/stories/add_user', to: 'stories#add_user'
   post '/search/show', to: 'search#show'
 
   resources :projects do
@@ -24,7 +25,15 @@ Rails.application.routes.draw do
     end
 
     resources :stories do
-      
+
+      collection do
+        post :add_user
+      end
+
+      member do
+        post :add_user
+      end
+        
       collection do
         post :todo
       end

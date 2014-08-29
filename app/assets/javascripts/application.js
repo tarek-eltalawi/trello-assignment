@@ -39,9 +39,9 @@ $(document).ready(function() {
 	$('.container-fluid').css('min-width', screen.width-85);
 	$('#myCarousel').css('min-height', screen.height-85);
 	//$('#myModal').modal()
-	$('#carouselimage1').css('min-height', screen.height-85);
-	$('#carouselimage2').css('min-height', screen.height-85);
-	$('#carouselimage3').css('min-height', screen.height-85);
+	$('#carouselimage1').css('min-height', screen.height-200);
+	$('#carouselimage2').css('min-height', screen.height-200);
+	$('#carouselimage3').css('min-height', screen.height-200);
 	// $('#myProjects').css('min-height', screen.height-700);
 	// $('#otherProjects').css('min-height', screen.height-700);
 });

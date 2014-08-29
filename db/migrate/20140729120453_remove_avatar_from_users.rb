@@ -1,5 +1,5 @@
 class RemoveAvatarFromUsers < ActiveRecord::Migration
   def change
-    remove_column :users, :avatar, :string
+  	remove_attachment :users, :avatar
   end
 end

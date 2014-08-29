@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.story_id = params[:story_id] if current_user.stories.where(id: params[:story_id])
     @task.state = "to do"
-    @story = current_user.stories.find(params[:story_id])
+    @story = Story.find(params[:story_id])
     respond_to do |format|
       if @task.save
         format.html { redirect_to @story.project, notice: 'Task was successfully created.' }

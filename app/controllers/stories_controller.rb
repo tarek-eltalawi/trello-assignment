@@ -30,6 +30,35 @@ class StoriesController < ApplicationController
     end
   end
 
+  def add_user
+    user_name = params[:q]
+    @user = User.find_by_email user_name
+    @sto = Story.find_by_id params[:stn]
+    if @user
+      if @user.stories.find_by_id(params[:stn])
+        respond_to do |format|
+          format.html { redirect_to @sto.project, notice: 'User Already added' }
+          format.json { head :no_content }
+        end
+      elsif @user.projects.find_by_id(@sto.project.id)
+        @user.stories << @sto
+        respond_to do |format|
+          format.html { redirect_to @sto.project, notice: 'User successfully added' }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to @sto.project, notice: 'User is not in the project' }
+          format.json { head :no_content }
+        end
+      end
+    else
+      respond_to do |format|
+          format.html { redirect_to @sto.project, alert: 'Not found user' }
+          format.json { head :no_content }
+      end
+    end
+  end
   # GET /stories
   # GET /stories.json
   def index
@@ -64,14 +93,10 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(story_params)
     @story.project_id = params[:project_id] if current_user.projects.where(id: params[:project_id])
-    @proj = Project.find_by_id(params[:project_id])
-    @proj.users.each do |user|
-      user.stories << @story
-    end
     @story.state = "to do"
     respond_to do |format|
       if @story.save
-        format.html { redirect_to [@story.project, @story], notice: 'Story was successfully created.' }
+        format.html { redirect_to @story.project, notice: 'Story was successfully created.' }
         format.json { render :show, status: :created, location: @story }
       else
         format.html { render :new }
@@ -85,7 +110,7 @@ class StoriesController < ApplicationController
   def update
     respond_to do |format|
       if @story.update(story_params)
-        format.html { redirect_to [@story.project, @story], notice: 'Story was successfully updated.' }
+        format.html { redirect_to @story.project, notice: 'Story was successfully updated.' }
         format.json { render :show, status: :ok, location: @story }
       else
         format.html { render :edit }

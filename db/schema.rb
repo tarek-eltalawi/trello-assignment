@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729142555) do
+ActiveRecord::Schema.define(version: 20140804082208) do
+
+  create_table "comments", force: true do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.string   "role",                        default: "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "name"
@@ -39,7 +54,7 @@ ActiveRecord::Schema.define(version: 20140729142555) do
     t.datetime "updated_at"
   end
 
-  add_index "stories", ["project_id"], name: "index_stories_on_project_id"
+  add_index "stories", ["project_id"], name: "index_stories_on_project_id", using: :btree
 
   create_table "stories_users", id: false, force: true do |t|
     t.integer "story_id", null: false
@@ -54,18 +69,7 @@ ActiveRecord::Schema.define(version: 20140729142555) do
     t.datetime "updated_at"
   end
 
-  add_index "tasks", ["story_id"], name: "index_tasks_on_story_id"
-
-  create_table "user_stories", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "state"
-    t.integer  "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_stories", ["project_id"], name: "index_user_stories_on_project_id"
+  add_index "tasks", ["story_id"], name: "index_tasks_on_story_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -87,7 +91,7 @@ ActiveRecord::Schema.define(version: 20140729142555) do
     t.string   "fullname"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
