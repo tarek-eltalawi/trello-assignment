@@ -22,22 +22,22 @@
           - if user_signed_in?
             %ul.nav.nav-pills
               %li.active
-                %a{:href => "http://localhost:3000/projects"} Projects
+                %a{style: 'display:none'}
+                  =link_to 'Projects' , projects_path
               %li.active
-                %a{:href => "http://localhost:3000"} Home
-              %li.active
-                %a{:href => "#"} Tour
+                %a{style: 'display:none'}
+                  =link_to 'Home', root_path
               %li.dropdown.pull-right.active
                 %a#drop5.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :role => "button"}
                   = current_user.email
                   %b.caret
                 %ul#menu2.dropdown-menu{"aria-labelledby" => "drop5", :role => "menu"}
                   %li{:role => "presentation"}
-                    %a{:href => "http://localhost:3000/profile/show"} Profile
+                    =link_to 'Profile' , show_profile_path
                   %li.divider{:role => "presentation"}
                   %li{:role => "presentation"}= link_to "Logout", destroy_user_session_path, method: :delete
               %li.pull-right
-                %a{:href => "http://localhost:3000/profile/show"}= image_tag(current_user.avatar.url,class: 'list_image', :alt => "avatar", :width => 20, :height => 25)
+                =link_to(image_tag(current_user.avatar.url,class: 'list_image', :alt => "avatar", :width => 20, :height => 25) , show_profile_path)
               %li.pull-right
                 = form_tag('/search/show', method: :post, class: 'navbar-form navbar-left', role: 'search') do
                   .form-group
@@ -46,7 +46,8 @@
           - else
             %ul.nav.nav-pills
               %li.active
-                %a{:href => "http://localhost:3000/"} HOME
+                %a{style: 'display:none'}
+                  =link_to 'Home', root_path
               %li.pull-right
                 %p.navbar-text
                   = link_to "Sign up", new_user_registration_path , style: 'color:white'

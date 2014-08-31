@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   get '/projects/add_user', to: 'projects#add_user'
+  get '/profile/show', to: 'profile#show', as: 'show_profile'
   post '/stories/todo.:format', to: 'stories#todo'
   post '/stories/doing.:format', to: 'stories#doing'
   post '/stories/done.:format', to: 'stories#done'
