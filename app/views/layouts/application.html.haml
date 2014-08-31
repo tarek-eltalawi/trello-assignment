@@ -1,0 +1,58 @@
+!!!
+%html
+  %head
+    %title Trello
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"}
+    %script{:src => "http://code.jquery.com/jquery.js"}
+    = stylesheet_link_tag    'bootstrap.min.css', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'bootstrap.min.js', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = favicon_link_tag 'trelloicon2-20140726-favicon.ico'
+    / Bootstrap
+  %body{:style => "background-color:#2E8BB9;"}
+    - if notice
+      %p.alert.alert-success= notice
+    - if alert
+      %p.alert.alert-danger= alert
+    .container
+      .navbar.navbar-static{:style => "background-color:#166491;"}
+        .navbar-inner
+          - if user_signed_in?
+            %ul.nav.nav-pills
+              %li.active
+                %a{:href => "http://localhost:3000/projects"} Projects
+              %li.active
+                %a{:href => "http://localhost:3000"} Home
+              %li.active
+                %a{:href => "#"} Tour
+              %li.dropdown.pull-right.active
+                %a#drop5.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :role => "button"}
+                  = current_user.email
+                  %b.caret
+                %ul#menu2.dropdown-menu{"aria-labelledby" => "drop5", :role => "menu"}
+                  %li{:role => "presentation"}
+                    %a{:href => "http://localhost:3000/profile/show"} Profile
+                  %li.divider{:role => "presentation"}
+                  %li{:role => "presentation"}= link_to "Logout", destroy_user_session_path, method: :delete
+              %li.pull-right
+                %a{:href => "http://localhost:3000/profile/show"}= image_tag(current_user.avatar.url,class: 'list_image', :alt => "avatar", :width => 20, :height => 25)
+              %li.pull-right
+                = form_tag('/search/show', method: :post, class: 'navbar-form navbar-left', role: 'search') do
+                  .form-group
+                    = text_field_tag :q, nil, {placeholder: 'Search for Projects', class: 'form-control', size: '60px'}
+                  = submit_tag("Submit", class: 'btn btn-default')
+          - else
+            %ul.nav.nav-pills
+              %li.active
+                %a{:href => "http://localhost:3000/"} HOME
+              %li.pull-right
+                %p.navbar-text
+                  = link_to "Sign up", new_user_registration_path , style: 'color:white'
+                  |
+                  \#{link_to "Login", new_user_session_path , style: 'color:white'}
+    .container-fluid{:style => "background-color:#2E8BB9; height:100%; width:100%; "}
+      .span10{:style => "padding-top:40px;"}
+        / Body content
+        = yield

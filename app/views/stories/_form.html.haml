@@ -1,0 +1,21 @@
+= form_for([@story.project, @story]) do |f|
+  - if @story.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@story.errors.count, "error")
+        prohibited this story from being saved:
+      %ul
+        - @story.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    .field
+      = f.label :name
+      %br/
+      = f.text_field :name, placeholder: 'Enter Name', class: 'form-control', width: '30%'
+  .form-group
+    .field
+      = f.label :description
+      %br/
+      = f.text_area :description, placeholder: 'Enter Description', class: 'form-control', width: '30%'
+  .actions
+    = f.submit class: 'btn btn-default'

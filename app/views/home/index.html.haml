@@ -1,0 +1,14 @@
+#myCarousel.carousel.slide{:style => "padding-top:5%; padding-right:3%; background-color:white"}
+  %ol.carousel-indicators
+    %li{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+    %li.active{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+    %li{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+  .carousel-inner.span10{:style => "width:100%;height:100%"}
+    .item
+      %img#carouselimage1.img-responsive.center-block{:alt => "", :src => "https://d2k1ftgv7pobq7.cloudfront.net/images/bd87ee916375920ae72dffadbb10d412/logo-blue-lg.png"}/
+    .item.active
+      %img#carouselimage2.img-responsive.center-block{:alt => "", :src => "http://webdevtwopointzero.com/wp-content/uploads/2011/09/trello.jpg"}/
+    .item
+      %img#carouselimage3.img-responsive.center-block{:alt => "", :src => "http://robsobers.com/wp-content/uploads/2012/12/trello.png"}/
+  %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"} ‹
+  %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"} ›

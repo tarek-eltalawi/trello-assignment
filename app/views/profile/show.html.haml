@@ -1,0 +1,67 @@
+%h1{:style => "color:white"}
+  %i= current_user.email
+%a{"data-target" => "#image", "data-toggle" => "modal", :href => "#image"}
+  = image_tag(current_user.avatar.url(:medium),class: 'list_image', :alt => "avatar")
+.pull-right
+  = button_to 'Edit profile', edit_user_registration_path, method: :get, class: 'btn btn-primary btn-lg'
+%br/
+%br/
+%br/
+%ul.nav.nav-pills.nav-justified{:style => "background-color:white"}
+  %li.active
+    %a{"data-toggle" => "tab", :href => "#myProjects"} My Projects
+  %li
+    %a{"data-toggle" => "tab", :href => "#otherProjects"} Projects enrolled in
+  %li.disabled
+    %a{:href => "#"} Notes
+%br/
+.tab-content
+  #myProjects.tab-pane.active.fade.in{:style => "background-color:white; width:100%; "}
+    - found = 0
+    - current_user.projects.each do |project|
+      - if project.admin == current_user.id
+        - found = 1
+        %div{:style => "padding-right:70%; padding-left:10px"}
+          %ul.thumbnails
+            %li.span4
+              .thumbnail
+                %div{:style => "display:inline-block"}
+                  = link_to(image_tag(project.avatar.url,class: 'list_image', :alt => "home image", :width => 200, :height => 100), project)
+                  %h3= link_to project.name, project
+                  %p
+                    %i= truncate(strip_tags(project.description), length: 80)
+    - if found == 0
+      .alert.alert-info{:role => "alert"}
+        %h4.alert-heading Sorry!
+        You have not created any projects, You can create projects
+        \#{link_to 'here', new_project_path}
+  #otherProjects.tab-pane.fade.in{:style => "background-color:white; width:100%; "}
+    - found = 0
+    - current_user.projects.each do |project|
+      - if project.admin != current_user.id
+        - found = 1
+        %div{:style => "padding-right:70%; padding-left:10px"}
+          %ul.thumbnails
+            %li.span4
+              .thumbnail
+                %div{:style => "display:inline-block"}
+                  = link_to(image_tag(project.avatar.url,class: 'list_image', :alt => "home image", :width => 200, :height => 100), project)
+                  %h3= link_to project.name, project
+                  %p
+                    %i= truncate(strip_tags(project.description), length: 80)
+    - if found == 0
+      .alert.alert-info{:role => "alert"}
+        %h4.alert-heading Sorry!
+        You're not enrolled in any projects
+        %br/
+        %br/
+/ image Modal
+#image.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+          %span.sr-only Close
+      .modal-body
+        = image_tag(current_user.avatar.url,class: 'list_image', :alt => "avatar", width: '500', height:'500')

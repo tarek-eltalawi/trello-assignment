@@ -1,0 +1,14 @@
+%p
+  %strong Name:
+  = @story.name
+%p
+  %strong Description:
+  = @story.description
+%p
+  %strong State:
+  = @story.state
+%p
+  %strong Project:
+  = @story.project.name
+= link_to 'Edit', edit_project_story_path(@story.project, @story)
+= link_to 'Back', @story.project

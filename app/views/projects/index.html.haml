@@ -1,0 +1,36 @@
+%br/
+%table
+  %thead
+    %tr
+      %th{:colspan => "3"}
+  %tbody
+    .bs-example{:style => "padding-bottom: 24px;"}
+      = link_to "New Project", new_project_path,class: 'btn btn-lg btn-danger'
+    %ul.nav.nav-pills.nav-justified{:style => "background-color:white"}
+      %li.active
+        %a{:href => "#myProjects"} My Projects
+    %br/
+    .tab-content
+      #myProjects.tab-pane.active{:style => "background-color:white; width:100%; "}
+        - if @projects.empty?
+          .alert.alert-info{:role => "alert"}
+            %h4.alert-heading Sorry!
+            You have not created any projects, You can create projects
+            \#{link_to 'here', new_project_path}
+        - else
+          %br/
+        - @projects.each do |project|
+          %div{:style => "padding-right:35%; padding-left:25%"}
+            %ul.thumbnails
+              %li.span4
+                .thumbnail
+                  %div{:style => "display:inline-block"}
+                    %div{:style => "padding-right:100px"}
+                      = link_to(image_tag(project.avatar.url,class: 'list_image', :alt => "home image", :width => 455, :height => 100), project)
+                    %br/
+                    .alert.alert-info.alert-block.pull.right{:style => "display:inline-block; width:80%; height:130px"}
+                      %h3.alert-heading= link_to project.name, project
+                      %i= truncate(strip_tags(project.description), length: 80)
+        - unless @projects.empty?
+          %br/
+= will_paginate @project, renderer: BootstrapPagination::Rails

@@ -1,0 +1,14 @@
+= form_for([@task.story.project, @task.story, @task]) do |f|
+  - if @task.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@task.errors.count, "error")
+        prohibited this task from being saved:
+      %ul
+        - @task.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    .field
+      = f.text_field :description , placeholder: 'Description', class: 'form-control'
+  .actions
+    = f.submit  class: 'btn btn-default'

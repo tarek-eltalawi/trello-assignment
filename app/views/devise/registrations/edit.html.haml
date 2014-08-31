@@ -1,0 +1,40 @@
+%h2{:style => "color:white"}
+  Editing  #{current_user.email}
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = devise_error_messages!
+  .form-group
+    .field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true  ,class: 'form-control'
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Currently waiting confirmation for: #{resource.unconfirmed_email}
+  .form-group
+    .field
+      = f.label :current_password
+      %i (we need your current password to confirm your changes)
+      %br/
+      = f.password_field :current_password, autocomplete: "off" , class: 'form-control'
+  .form-group
+    .field
+      = f.label :New_password
+      %i (leave blank if you don't want to change it)
+      %br/
+      = f.password_field :password, autocomplete: "off" , class: 'form-control'
+  .form-group
+    .field
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "off" , class: 'form-control'
+  .form-group
+    .field
+      = f.label :Avatar
+      %br/
+      = f.file_field :avatar
+  .actions
+    = f.submit "Update", class: 'btn btn-default'
+%h3{:style => "color:#F02A2A"} Cancel my account
+%p{:style => "color:#F02A2A"}
+  %i Unhappy?
+  = button_to "Cancel my account", registration_path(resource_name), class: 'btn btn-primary' , data: { confirm: "Are you sure?" }, method: :delete

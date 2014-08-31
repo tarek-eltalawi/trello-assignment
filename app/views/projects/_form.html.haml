@@ -1,0 +1,27 @@
+= form_for(@project, role: 'form') do |f|
+  - if @project.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@project.errors.count, "error")
+        prohibited this project from being saved:
+      %ul
+        - @project.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    .field
+      = f.label :name
+      %br/
+      = f.text_field :name, placeholder: 'Enter Name', class: 'form-control', width: '30%'
+  .form-group
+    .field
+      = f.label :description
+      %br/
+      = f.text_area :description, placeholder: 'Enter Description', class: 'form-control', width: '30%'
+  .form-group
+    .field
+      = f.label :image
+      %br/
+      = f.file_field :avatar
+  .actions
+    = f.submit class: 'btn btn-default'
+
