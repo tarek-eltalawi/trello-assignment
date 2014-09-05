@@ -13,7 +13,6 @@ class StoriesController < ApplicationController
 
   def doing 
     @project = current_user.projects.find(params[:project_id])
-    # @project = current_user.projects.find(params[:id])
     @story.state = "doing"
     @story.save
     respond_to do |format|
